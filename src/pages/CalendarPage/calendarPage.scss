@@ -1,0 +1,9 @@
+.calendar-page {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 1024px) {
+    padding: 20px;
+  }
+}
