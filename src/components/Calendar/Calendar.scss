@@ -6,18 +6,24 @@
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+
+  @media (max-width: 600px) {
+    padding: 16px;
+    font-size: 14px;
+  }
 }
 
 .calendar__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 1.25em;
 }
 
 .calendar__title {
   font-family: var(--heading);
-  font-size: 20px;
+  font-size: 1.25em;
   font-weight: 500;
   color: #fff;
 }
@@ -26,9 +32,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
+  width: 2em;
+  height: 2em;
+  border-radius: 0.5em;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.1);
   color: #fff;
@@ -44,22 +50,22 @@
 .calendar__weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
-  margin-bottom: 4px;
+  gap: 0.25em;
+  margin-bottom: 0.25em;
 }
 
 .calendar__weekday {
-  font-size: 13px;
+  font-size: 0.8125em;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.6);
   text-align: center;
-  padding: 4px 0;
+  padding: 0.25em 0;
 }
 
 .calendar__grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
+  gap: 0.25em;
 }
 
 .calendar__cell {
@@ -67,8 +73,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
-  font-size: 14px;
+  border-radius: 0.5em;
+  font-size: 0.875em;
   border: none;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
@@ -87,12 +93,39 @@
   }
 
   &--active {
-    background: rgba(255, 255, 255, 0.9);
-    color: #1a1828;
+    flex-direction: column;
+    gap: 0.0625em;
+    color: #fff;
     font-weight: 500;
+    background: rgba(255, 255, 255, 0.12);
 
     &:hover {
-      background: #fff;
+      background: rgba(255, 255, 255, 0.2);
     }
   }
+}
+
+.calendar__cell-day {
+  font-size: 1em;
+  line-height: 1;
+}
+
+.calendar__cell-percent {
+  font-size: 0.6875em;
+  font-weight: 600;
+  line-height: 1;
+  color: #fff;
+  opacity: 0.85;
+  margin-top: 0.125em;
+}
+
+.calendar__cell-desc {
+  font-size: 0.5625em;
+  line-height: 1.2;
+  color: #fff;
+  opacity: 0.6;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

@@ -1,11 +1,17 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
+export interface DayData {
+  percentage: number
+  description: string
+}
+
 export interface CalendarData {
   id: string
   name: string
   goal: string
-  activeDates: string[]
+  extended: boolean
+  activeDates: Record<string, DayData>
 }
 
 interface AppState {
@@ -16,7 +22,10 @@ interface AppState {
   activeId: string
   isModalOpen: boolean
   toggleDate: (date: string) => void
-  addCalendar: (name: string, goal: string) => void
+  setDayDetail: (date: string, detail: DayData) => void
+  removeDay: (date: string) => void
+  addCalendar: (name: string, goal: string, extended: boolean) => void
+  editCalendar: (id: string, name: string, goal: string, extended: boolean) => void
   deleteCalendar: (id: string) => void
   setActiveId: (id: string) => void
   setIsModalOpen: (open: boolean) => void
@@ -48,26 +57,60 @@ const useAppStore = create<AppState>()(
               ...state.calendarsByUser,
               [state.user]: userCals.map((cal) => {
                 if (cal.id !== state.activeId) return cal
-                const hasDate = cal.activeDates.includes(date)
+                const { [date]: _, ...rest } = cal.activeDates
+                const isActive = date in cal.activeDates
                 return {
                   ...cal,
-                  activeDates: hasDate
-                    ? cal.activeDates.filter((d) => d !== date)
-                    : [...cal.activeDates, date],
+                  activeDates: isActive ? rest : { ...cal.activeDates, [date]: { percentage: 0, description: '' } },
                 }
               }),
             },
           }
         }),
 
-      addCalendar: (name, goal) =>
+      setDayDetail: (date, detail) =>
+        set((state) => {
+          if (!state.user) return {}
+          const userCals = state.calendarsByUser[state.user] ?? []
+          return {
+            calendarsByUser: {
+              ...state.calendarsByUser,
+              [state.user]: userCals.map((cal) => {
+                if (cal.id !== state.activeId) return cal
+                return {
+                  ...cal,
+                  activeDates: { ...cal.activeDates, [date]: detail },
+                }
+              }),
+            },
+          }
+        }),
+
+      removeDay: (date) =>
+        set((state) => {
+          if (!state.user) return {}
+          const userCals = state.calendarsByUser[state.user] ?? []
+          return {
+            calendarsByUser: {
+              ...state.calendarsByUser,
+              [state.user]: userCals.map((cal) => {
+                if (cal.id !== state.activeId) return cal
+                const { [date]: _, ...rest } = cal.activeDates
+                return { ...cal, activeDates: rest }
+              }),
+            },
+          }
+        }),
+
+      addCalendar: (name, goal, extended) =>
         set((state) => {
           if (!state.user) return {}
           const newCalendar: CalendarData = {
             id: Date.now().toString(),
             name,
             goal,
-            activeDates: [],
+            extended,
+            activeDates: {},
           }
           const userCals = state.calendarsByUser[state.user] ?? []
           return {
@@ -76,6 +119,20 @@ const useAppStore = create<AppState>()(
               [state.user]: [...userCals, newCalendar],
             },
             activeId: newCalendar.id,
+          }
+        }),
+
+      editCalendar: (id, name, goal, extended) =>
+        set((state) => {
+          if (!state.user) return {}
+          const userCals = state.calendarsByUser[state.user] ?? []
+          return {
+            calendarsByUser: {
+              ...state.calendarsByUser,
+              [state.user]: userCals.map((cal) =>
+                cal.id === id ? { ...cal, name, goal, extended } : cal
+              ),
+            },
           }
         }),
 

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import type { DayData } from '../../store/useAppStore'
 import './Calendar.scss'
 
 const WEEK_DAYS = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
@@ -22,12 +23,20 @@ function formatDate(year: number, month: number, day: number) {
   return `${year}-${m}-${d}`
 }
 
-interface CalendarProps {
-  activeDates: string[]
-  onDateToggle: (date: string) => void
+function percentColor(p: number) {
+  const r = p < 50 ? 210 : Math.round(210 - (p - 50) * 3.2)
+  const g = p < 50 ? Math.round(100 + p * 2.2) : 210
+  return `rgb(${r},${g},90)`
 }
 
-function Calendar({ activeDates, onDateToggle }: CalendarProps) {
+interface CalendarProps {
+  activeDates: Record<string, DayData>
+  extended: boolean
+  onDateToggle: (date: string) => void
+  onDayClick: (date: string) => void
+}
+
+function Calendar({ activeDates, extended, onDateToggle, onDayClick }: CalendarProps) {
   const now = new Date()
   const [month, setMonth] = useState(now.getMonth())
   const [year, setYear] = useState(now.getFullYear())
@@ -54,6 +63,14 @@ function Calendar({ activeDates, onDateToggle }: CalendarProps) {
       setYear((y) => y + 1)
     } else {
       setMonth((m) => m + 1)
+    }
+  }
+
+  const handleDayClick = (dateStr: string) => {
+    if (extended) {
+      onDayClick(dateStr)
+    } else {
+      onDateToggle(dateStr)
     }
   }
 
@@ -85,15 +102,24 @@ function Calendar({ activeDates, onDateToggle }: CalendarProps) {
             return <div key={`empty-${i}`} className="calendar__cell calendar__cell--empty" />
           }
           const dateStr = formatDate(year, month, day)
-          const isActive = activeDates.includes(dateStr)
+          const detail = activeDates[dateStr]
+          const isActive = detail !== undefined
+          const cellStyle = isActive ? { border: `2px solid ${percentColor(detail.percentage)}` } : undefined
           return (
             <button
               key={dateStr}
               type="button"
               className={`calendar__cell calendar__cell--day${isActive ? ' calendar__cell--active' : ''}`}
-              onClick={() => onDateToggle(dateStr)}
+              style={cellStyle}
+              onClick={() => handleDayClick(dateStr)}
             >
-              {day}
+              <span className="calendar__cell-day">{day}</span>
+              {isActive && detail.percentage > 0 && (
+                <span className="calendar__cell-percent">{detail.percentage}%</span>
+              )}
+              {isActive && detail.description && (
+                <span className="calendar__cell-desc">{detail.description}</span>
+              )}
             </button>
           )
         })}
