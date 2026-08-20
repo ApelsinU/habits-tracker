@@ -1,0 +1,122 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal {
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 0;
+}
+
+.modal__title {
+  font-family: var(--heading);
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+  margin: 0;
+}
+
+.modal__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+  }
+}
+
+.modal__body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 24px 24px;
+}
+
+.modal__input {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 14px;
+  font-family: var(--sans);
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  &:focus {
+    border-color: rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.18);
+  }
+}
+
+.modal__actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.modal__btn {
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &--cancel {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.75);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+  }
+
+  &--submit {
+    background: rgba(255, 255, 255, 0.9);
+    color: #1a1828;
+    border-color: rgba(255, 255, 255, 0.9);
+
+    &:hover {
+      background: #fff;
+    }
+  }
+}

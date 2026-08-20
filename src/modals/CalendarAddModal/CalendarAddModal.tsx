@@ -4,11 +4,12 @@ import './CalendarAddModal.scss'
 interface CalendarAddModalProps {
   isOpen: boolean
   onClose: () => void
-  onAdd: (name: string) => void
+  onAdd: (name: string, goal: string) => void
 }
 
 function CalendarAddModal({ isOpen, onClose, onAdd }: CalendarAddModalProps) {
   const [name, setName] = useState('')
+  const [goal, setGoal] = useState('')
 
   if (!isOpen) return null
 
@@ -16,14 +17,16 @@ function CalendarAddModal({ isOpen, onClose, onAdd }: CalendarAddModalProps) {
     e.preventDefault()
     const trimmed = name.trim()
     if (trimmed) {
-      onAdd(trimmed)
+      onAdd(trimmed, goal.trim())
       setName('')
+      setGoal('')
       onClose()
     }
   }
 
   const handleClose = () => {
     setName('')
+    setGoal('')
     onClose()
   }
 
@@ -46,6 +49,16 @@ function CalendarAddModal({ isOpen, onClose, onAdd }: CalendarAddModalProps) {
             value={name}
             onChange={(e) => setName(e.target.value)}
             autoFocus
+          />
+          <div className="modal__divider">
+            <span className="modal__divider-label">Необязательно</span>
+          </div>
+          <input
+            type="text"
+            className="modal__input"
+            placeholder="Цель"
+            value={goal}
+            onChange={(e) => setGoal(e.target.value)}
           />
           <div className="modal__actions">
             <button type="button" className="modal__btn modal__btn--cancel" onClick={handleClose}>

@@ -9,18 +9,21 @@
 .auth-card {
   width: 100%;
   max-width: 400px;
-  padding: 32px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: var(--bg);
+  padding: 36px 32px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
 }
 
 .auth-card__title {
   font-family: var(--heading);
   font-size: 24px;
   font-weight: 500;
-  color: var(--text-h);
-  margin: 0 0 24px;
+  color: #fff;
+  margin: 0 0 28px;
   text-align: center;
 }
 
@@ -37,47 +40,86 @@
 }
 
 .auth-card__label {
-  font-size: 14px;
-  color: var(--text);
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .auth-card__input {
-  padding: 10px 14px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--bg);
-  color: var(--text-h);
+  padding: 11px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
   font-size: 14px;
   font-family: var(--sans);
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, background 0.2s;
 
   &::placeholder {
-    color: var(--text);
+    color: rgba(255, 255, 255, 0.45);
   }
 
   &:focus {
-    border-color: var(--accent-border);
+    border-color: rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.18);
+  }
+}
+
+.auth-card__input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.auth-card__input--password {
+  width: 100%;
+  padding-right: 42px;
+}
+
+.auth-card__toggle-password {
+  position: absolute;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
   }
 }
 
 .auth-card__error {
   font-size: 13px;
-  color: #ef4444;
+  color: #ffa0a0;
 }
 
 .auth-card__submit {
-  padding: 10px 16px;
-  border-radius: 8px;
+  padding: 11px 16px;
+  border-radius: 10px;
   border: none;
-  background: var(--accent);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.9);
+  color: #1a1828;
   font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
   margin-top: 4px;
-  transition: opacity 0.2s;
+  transition: background 0.2s, transform 0.1s;
 
   &:hover {
-    opacity: 0.9;
+    background: #fff;
+  }
+
+  &:active {
+    transform: scale(0.98);
   }
 }
