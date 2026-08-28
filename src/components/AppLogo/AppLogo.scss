@@ -1,0 +1,74 @@
+.app-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  color: #fff;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+.app-logo__mark {
+  display: block;
+}
+
+.app-logo__ring {
+  stroke-dasharray: 195;
+  stroke-dashoffset: 195;
+  animation: app-logo-ring 1.6s ease-out forwards;
+  transform-origin: center;
+}
+
+.app-logo__check {
+  opacity: 0;
+  animation: app-logo-check 0.7s 1.4s ease-out forwards;
+}
+
+.app-logo__dot {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: app-logo-dot 1.6s ease-out forwards;
+}
+
+.app-logo__text {
+  font-family: var(--heading);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  opacity: 0;
+  animation: app-logo-fade 0.8s 1.5s ease-out forwards;
+}
+
+@keyframes app-logo-ring {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes app-logo-check {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes app-logo-dot {
+  0% {
+    transform: scale(0);
+  }
+  60% {
+    transform: scale(1.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes app-logo-fade {
+  to {
+    opacity: 1;
+  }
+}

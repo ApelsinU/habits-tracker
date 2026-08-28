@@ -38,6 +38,8 @@ interface AppState {
   setSimpleTheme: (value: boolean) => void
   simpleDark: boolean
   setSimpleDark: (value: boolean) => void
+  skipWelcomeScreen: boolean
+  setSkipWelcomeScreen: (value: boolean) => void
   activeId: string
   isModalOpen: boolean
   toggleDate: (date: string) => void
@@ -94,6 +96,9 @@ const useAppStore = create<AppState>()(
 
       simpleDark: false,
       setSimpleDark: (simpleDark) => set({ simpleDark }),
+
+      skipWelcomeScreen: false,
+      setSkipWelcomeScreen: (skipWelcomeScreen) => set({ skipWelcomeScreen }),
 
       activeId: '',
       isModalOpen: false,
@@ -261,7 +266,18 @@ const useAppStore = create<AppState>()(
           }
         }),
     }),
-    { name: 'habits-tracker' },
+    {
+      name: 'habits-tracker',
+      migrate: (persistedState: unknown, _version: number) => {
+        const state = persistedState as Record<string, unknown>
+        if (state && typeof state.skipLoadingScreen === 'boolean' && state.skipWelcomeScreen === undefined) {
+          state.skipWelcomeScreen = state.skipLoadingScreen
+        }
+        delete state.skipLoadingScreen
+        return state
+      },
+      version: 1,
+    },
   ),
 )
 

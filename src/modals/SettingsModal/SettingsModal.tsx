@@ -16,7 +16,9 @@ function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
   const setSimpleTheme = useAppStore((s) => s.setSimpleTheme)
   const simpleDark = useAppStore((s) => s.simpleDark)
   const setSimpleDark = useAppStore((s) => s.setSimpleDark)
-  const [tab, setTab] = useState<'background' | 'simple'>('background')
+  const skipWelcomeScreen = useAppStore((s) => s.skipWelcomeScreen)
+  const setSkipWelcomeScreen = useAppStore((s) => s.setSkipWelcomeScreen)
+  const [tab, setTab] = useState<'background' | 'simple' | 'welcome'>('background')
 
   if (!isOpen) return null
 
@@ -48,9 +50,30 @@ function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
           >
             Простая тема
           </button>
+          <button
+            type="button"
+            className={`settings-modal__tab${tab === 'welcome' ? ' settings-modal__tab--active' : ''}`}
+            onClick={() => setTab('welcome')}
+          >
+            Экран Приветствия
+          </button>
         </div>
         <div className="settings-modal__body">
-          {tab === 'background' ? (
+          {tab === 'welcome' ? (
+            <label className="settings-modal__simple">
+              <span className="settings-modal__simple-label">Пропускать экран Приветствия</span>
+              <span className="settings-modal__simple-desc">Не показывать анимацию при запуске</span>
+              <button
+                type="button"
+                role="switch"
+                aria-checked={skipWelcomeScreen}
+                className={`settings-modal__switch${skipWelcomeScreen ? ' settings-modal__switch--on' : ''}`}
+                onClick={() => setSkipWelcomeScreen(!skipWelcomeScreen)}
+              >
+                <span className="settings-modal__switch-thumb" />
+              </button>
+            </label>
+          ) : tab === 'background' ? (
             <>
               <span className="settings-modal__label">Фон</span>
               <div className="settings-modal__grid">

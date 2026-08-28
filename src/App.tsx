@@ -5,6 +5,7 @@ import TodoListPage from './pages/TodoListPage/TodoListPage'
 import StatisticsPage from './pages/StatisticsPage/StatisticsPage'
 import SideMenu from './components/SideMenu/SideMenu'
 import Background from './components/Background/Background'
+import WelcomeScreen from './components/WelcomeScreen/WelcomeScreen'
 import SettingsModal from './modals/SettingsModal/SettingsModal'
 import { getBackgroundTheme } from './assets/background/backgrounds'
 import useAppStore from './store/useAppStore'
@@ -18,9 +19,11 @@ function App() {
   const simpleTheme = useAppStore((s) => s.simpleTheme)
   const simpleDark = useAppStore((s) => s.simpleDark)
   const currentPage = useAppStore((s) => s.currentPage)
+  const skipWelcomeScreen = useAppStore((s) => s.skipWelcomeScreen)
   const backgroundId = user ? (backgroundsByUser[user] ?? lastBackground) : lastBackground
   const theme = getBackgroundTheme(backgroundId)
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(!skipWelcomeScreen)
 
   const page =
     currentPage === 'todo' ? <TodoListPage /> : currentPage === 'stats' ? <StatisticsPage /> : <CalendarPage />
@@ -47,6 +50,14 @@ function App() {
       <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
     </>
   )
+
+  if (isLoading) {
+    return (
+      <div className={`app-root app-root--${theme}`}>
+        <WelcomeScreen backgroundId={backgroundId} user={user} onStart={() => setIsLoading(false)} />
+      </div>
+    )
+  }
 
   return (
     <div
