@@ -109,6 +109,21 @@
   }
 }
 
+.app-root--light .day-modal__range {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--glass-border-soft);
+
+  &::-webkit-slider-thumb {
+    background: #fff;
+    border: 1px solid var(--glass-border-strong);
+  }
+
+  &::-moz-range-thumb {
+    background: #fff;
+    border: 1px solid var(--glass-border-strong);
+  }
+}
+
 .day-modal__value {
   font-size: 14px;
   font-weight: 500;

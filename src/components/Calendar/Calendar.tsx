@@ -23,20 +23,24 @@ function formatDate(year: number, month: number, day: number) {
   return `${year}-${m}-${d}`
 }
 
-function percentColor(p: number) {
+function percentColor(p: number, light: boolean) {
   const r = p < 50 ? 210 : Math.round(210 - (p - 50) * 3.2)
   const g = p < 50 ? Math.round(100 + p * 2.2) : 210
+  if (light) {
+    return `rgb(${Math.min(255, Math.round(r + 45))},${Math.min(255, Math.round(g + 45))},150)`
+  }
   return `rgb(${r},${g},90)`
 }
 
 interface CalendarProps {
   activeDates: Record<string, DayData>
   extended: boolean
+  theme: 'dark' | 'light'
   onDateToggle: (date: string) => void
   onDayClick: (date: string) => void
 }
 
-function Calendar({ activeDates, extended, onDateToggle, onDayClick }: CalendarProps) {
+function Calendar({ activeDates, extended, theme, onDateToggle, onDayClick }: CalendarProps) {
   const now = new Date()
   const [month, setMonth] = useState(now.getMonth())
   const [year, setYear] = useState(now.getFullYear())
@@ -107,7 +111,7 @@ function Calendar({ activeDates, extended, onDateToggle, onDayClick }: CalendarP
           const simple = !extended
           const isComplete = isActive && (simple || detail.percentage === 100)
           const progress = isActive ? (simple ? 100 : detail.percentage) : 0
-          const barColor = isActive ? (simple ? 'rgb(80,200,90)' : percentColor(detail.percentage)) : undefined
+          const barColor = isActive ? (simple ? 'rgb(80,200,90)' : percentColor(detail.percentage, theme === 'light')) : undefined
           return (
             <button
               key={dateStr}

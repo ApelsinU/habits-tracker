@@ -129,15 +129,8 @@
   }
 
   &--simple-complete {
-    background: rgba(80, 200, 90, 0.9);
-    color: #fff;
-
-    &:hover {
-      background: rgba(80, 200, 90, 1);
-    }
-
     .calendar__cell-day {
-      color: #fff;
+      color: var(--glass-text);
     }
   }
 }

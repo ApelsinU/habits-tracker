@@ -6,12 +6,17 @@ import EditCalendarModal from '../../modals/EditCalendarModal/EditCalendarModal'
 import DayDetailModal from '../../modals/DayDetailModal/DayDetailModal'
 import ConfirmModal from '../../modals/ConfirmModal/ConfirmModal'
 import useAppStore from '../../store/useAppStore'
+import { getBackgroundTheme } from '../../assets/background/backgrounds'
 import './calendarPage.scss'
 
 function CalendarPage() {
   const user = useAppStore((s) => s.user)
   const calendarsByUser = useAppStore((s) => s.calendarsByUser)
   const calendars = user ? (calendarsByUser[user] ?? []) : []
+  const backgroundsByUser = useAppStore((s) => s.backgroundsByUser)
+  const lastBackground = useAppStore((s) => s.lastBackground)
+  const backgroundId = user ? (backgroundsByUser[user] ?? lastBackground) : lastBackground
+  const theme = getBackgroundTheme(backgroundId)
   const activeId = useAppStore((s) => s.activeId)
   const isModalOpen = useAppStore((s) => s.isModalOpen)
   const toggleDate = useAppStore((s) => s.toggleDate)
@@ -50,6 +55,29 @@ function CalendarPage() {
   const dayDetail = editingDay && activeCalendar ? activeCalendar.activeDates[editingDay] : undefined
   const isDayNew = editingDay !== null && activeCalendar ? !(editingDay in activeCalendar.activeDates) : true
 
+  if (calendars.length === 0) {
+    return (
+      <div className="calendar-page">
+        <div className="calendar-page__empty">
+          <p className="calendar-page__empty-text">Создайте свой первый календарь привычек</p>
+          <button
+            type="button"
+            className="calendar-page__empty-btn"
+            onClick={() => setIsModalOpen(true)}
+          >
+            Создать календарь привычек
+          </button>
+        </div>
+
+        <CalendarAddModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onAdd={addCalendar}
+        />
+      </div>
+    )
+  }
+
   return (
     <div className="calendar-page">
       <CalendarSwitcher
@@ -65,6 +93,7 @@ function CalendarPage() {
         <Calendar
           activeDates={activeCalendar.activeDates}
           extended={activeCalendar.extended}
+          theme={theme}
           onDateToggle={toggleDate}
           onDayClick={handleDayClick}
         />
