@@ -1,103 +1,57 @@
 .calendar-switcher {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 12px;
   margin-bottom: 24px;
 
   @media (max-width: 600px) {
-    flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 16px;
   }
 }
 
-.calendar-switcher__tabs {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  flex: 1;
-  min-width: 0;
-}
-
-.calendar-switcher__tab {
+.calendar-switcher__select {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 14px;
   border-radius: 10px;
   border: 1px solid var(--glass-border-soft);
-  background: var(--glass-bg);
-  color: var(--glass-text-muted);
+  background: var(--glass-bg-soft);
+  color: var(--glass-text);
   font-size: 14px;
-  cursor: default;
+  cursor: pointer;
   transition: all 0.2s;
-  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
 
   &:hover {
     background: var(--glass-hover-bg);
-    color: var(--glass-text);
-  }
-
-  &--active {
-    background: var(--glass-strong-bg);
-    border-color: var(--glass-strong-bg);
-    color: var(--glass-text-on-strong);
-    font-weight: 600;
-    opacity: 0.7;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
-
-    &:hover {
-      background: var(--glass-strong-bg-hover);
-      color: var(--glass-text-on-strong);
-    }
-    .calendar-switcher__tab-goal {
-      opacity: 1;
-    }
-
-    .calendar-switcher__tab-edit {
-      color: rgba(26, 24, 40, 0.45);
-
-      &:hover {
-        color: #1a1828;
-        background: rgba(26, 24, 40, 0.08);
-      }
-    }
-
-    .calendar-switcher__tab-delete {
-      color: rgba(26, 24, 40, 0.45);
-
-      &:hover {
-        color: var(--danger);
-        background: rgba(212, 56, 13, 0.1);
-      }
-    }
+    border-color: var(--glass-border-strong);
   }
 }
 
-.app-root--light .calendar-switcher__tab--active {
-  opacity: 0.8;
-}
-
-.calendar-switcher__tab-name {
+.calendar-switcher__select-label {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 2px;
-  background: none;
-  border: none;
-  padding: 0;
-  color: inherit;
-  font-size: inherit;
-  cursor: pointer;
   min-width: 0;
+  overflow: hidden;
 }
 
-.calendar-switcher__tab-title {
-  font-size: 14px;
+.calendar-switcher__select-title {
+  font-weight: 600;
   line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
 }
 
-.calendar-switcher__tab-goal {
+.calendar-switcher__select-goal {
   font-size: 11px;
   line-height: 1.2;
   opacity: 0.6;
@@ -107,45 +61,135 @@
   max-width: 100%;
 }
 
-.calendar-switcher__tab-edit {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 18px;
-  height: 18px;
-  border-radius: 4px;
-  border: none;
-  background: transparent;
-  color: var(--glass-text-faint);
-  cursor: pointer;
-  padding: 0;
+.calendar-switcher__select-caret {
   flex-shrink: 0;
-  transition: all 0.2s;
+  color: var(--glass-text-faint);
+  transition: transform 0.2s;
 
-  &:hover {
-    color: var(--glass-text);
-    background: var(--glass-bg-soft);
+  &--open {
+    transform: rotate(180deg);
   }
 }
 
-.calendar-switcher__tab-delete {
+.calendar-switcher__menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 8px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg-soft);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  z-index: 60;
+  max-height: 320px;
+  overflow-y: auto;
+
+  @media (max-width: 600px) {
+    max-height: 280px;
+  }
+}
+
+.calendar-switcher__menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
+  border-radius: 8px;
+  transition: background 0.15s;
+
+  &:hover {
+    background: var(--glass-hover-bg);
+  }
+
+  &--active {
+    background: var(--glass-bg-soft);
+    color: var(--glass-text);
+    border: 1px solid var(--glass-border-strong);
+    opacity: 0.85;
+  }
+}
+
+.calendar-switcher__menu-name {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+  background: none;
+  border: none;
+  padding: 6px 8px;
+  color: inherit;
+  font-size: inherit;
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.calendar-switcher__menu-title {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.calendar-switcher__menu-goal {
+  font-size: 11px;
+  line-height: 1.2;
+  opacity: 0.6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.calendar-switcher__menu-edit,
+.calendar-switcher__menu-delete {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 18px;
-  height: 18px;
-  border-radius: 4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
   border: none;
   background: transparent;
-  color: var(--glass-text-faint);
+  color: var(--glass-text-muted);
   cursor: pointer;
   padding: 0;
   flex-shrink: 0;
-  transition: all 0.2s;
+  transition: all 0.15s;
 
   &:hover {
-    color: var(--glass-danger);
-    background: rgba(255, 160, 160, 0.15);
+    background: var(--glass-hover-bg);
+  }
+}
+
+.calendar-switcher__menu-edit {
+  color: #ffa040;
+
+  &:hover {
+    color: #ffb066;
+    background: rgba(255, 160, 64, 0.15);
+  }
+}
+
+.calendar-switcher__menu-delete {
+  color: #ff5a52;
+
+  &:hover {
+    color: #ff6b64;
+    background: rgba(255, 90, 82, 0.15);
   }
 }
 
@@ -153,8 +197,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 10px;
   border: 1px solid var(--glass-border-soft);
   background: var(--glass-bg);
@@ -163,14 +207,9 @@
   flex-shrink: 0;
   transition: all 0.2s;
 
-  @media (max-width: 600px) {
-    width: 40px;
-    height: 40px;
-    margin-left: auto;
-  }
-
   &:hover {
     background: var(--glass-strong-bg);
-    border-color: var(--glass-border-strong);
+    color: var(--glass-text-on-strong);
+    border-color: var(--glass-strong-bg);
   }
 }
