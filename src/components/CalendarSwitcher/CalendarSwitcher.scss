@@ -207,19 +207,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
+  width: 48px;
+  height: 52px;
+  flex-shrink: 0;
   border-radius: 10px;
   border: 1px solid var(--glass-border-soft);
   background: var(--glass-bg);
   color: var(--glass-text);
   cursor: pointer;
-  flex-shrink: 0;
   transition: all 0.2s;
 
   &:hover {
     background: var(--glass-strong-bg);
     color: var(--glass-text-on-strong);
     border-color: var(--glass-strong-bg);
+  }
+
+  @media (max-width: 600px) {
+    width: 44px;
+    height: 48px;
   }
 }
