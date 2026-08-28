@@ -9,8 +9,9 @@
   font-size: 16px;
 
   @media (max-width: 600px) {
-    padding: 16px;
-    font-size: 14px;
+    padding: 12px;
+    font-size: 13px;
+    border-radius: 14px;
   }
 }
 
@@ -19,6 +20,10 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1.25em;
+
+  @media (max-width: 600px) {
+    margin-bottom: 0.875em;
+  }
 }
 
 .calendar__title {
@@ -26,6 +31,10 @@
   font-size: 1.25em;
   font-weight: 500;
   color: #fff;
+
+  @media (max-width: 600px) {
+    font-size: 1.1em;
+  }
 }
 
 .calendar__nav {
@@ -40,6 +49,11 @@
   color: #fff;
   cursor: pointer;
   transition: background 0.2s, border-color 0.2s;
+
+  @media (max-width: 600px) {
+    width: 2.2em;
+    height: 2.2em;
+  }
 
   &:hover {
     background: rgba(255, 255, 255, 0.2);
@@ -138,4 +152,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  @media (max-width: 600px) {
+    display: none;
+  }
 }

@@ -7,6 +7,12 @@
   width: 100%;
   max-width: 400px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+
+  @media (max-width: 600px) {
+    max-width: 100%;
+    border-radius: 16px 16px 0 0;
+    border-bottom: none;
+  }
 }
 
 .day-modal__header {
@@ -14,6 +20,10 @@
   align-items: center;
   justify-content: space-between;
   padding: 20px 24px 0;
+
+  @media (max-width: 600px) {
+    padding: 18px 18px 0;
+  }
 }
 
 .day-modal__title {
@@ -49,6 +59,10 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  @media (max-width: 600px) {
+    padding: 16px 18px;
+  }
 }
 
 .day-modal__label {
@@ -133,6 +147,10 @@
   justify-content: space-between;
   padding: 0 24px 20px;
   gap: 8px;
+
+  @media (max-width: 600px) {
+    padding: 0 18px 22px;
+  }
 }
 
 .day-modal__actions-right {
