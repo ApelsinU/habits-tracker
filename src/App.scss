@@ -13,10 +13,10 @@
   justify-content: flex-end;
   gap: 12px;
   padding: 12px 32px;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--glass-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid var(--glass-border-soft);
 
   @media (max-width: 1024px) {
     padding: 12px 20px;
@@ -30,7 +30,7 @@
 
 .app__user {
   font-size: 14px;
-  color: #fff;
+  color: var(--glass-text);
   font-weight: 500;
 }
 
@@ -38,16 +38,16 @@
 .app__logout {
   padding: 6px 12px;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.75);
+  border: 1px solid var(--glass-border-soft);
+  background: var(--glass-bg);
+  color: var(--glass-text-muted);
   font-size: 13px;
   cursor: pointer;
   transition: all 0.2s;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.2);
-    color: #fff;
-    border-color: rgba(255, 255, 255, 0.35);
+    background: var(--glass-hover-bg);
+    color: var(--glass-text);
+    border-color: var(--glass-border-strong);
   }
 }

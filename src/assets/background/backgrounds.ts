@@ -12,19 +12,20 @@ import bg10 from './background-10.jpg'
 export interface BackgroundOption {
   id: string
   src: string
+  theme: 'dark' | 'light'
 }
 
 export const backgroundOptions: BackgroundOption[] = [
-  { id: 'background-1', src: bg1 },
-  { id: 'background-2', src: bg2 },
-  { id: 'background-3', src: bg3 },
-  { id: 'background-4', src: bg4 },
-  { id: 'background-5', src: bg5 },
-  { id: 'background-6', src: bg6 },
-  { id: 'background-7', src: bg7 },
-  { id: 'background-8', src: bg8 },
-  { id: 'background-9', src: bg9 },
-  { id: 'background-10', src: bg10 },
+  { id: 'background-1', src: bg1, theme: 'dark' },
+  { id: 'background-2', src: bg2, theme: 'light' },
+  { id: 'background-3', src: bg3, theme: 'light' },
+  { id: 'background-4', src: bg4, theme: 'light' },
+  { id: 'background-5', src: bg5, theme: 'light' },
+  { id: 'background-6', src: bg6, theme: 'light' },
+  { id: 'background-7', src: bg7, theme: 'light' },
+  { id: 'background-8', src: bg8, theme: 'light' },
+  { id: 'background-9', src: bg9, theme: 'light' },
+  { id: 'background-10', src: bg10, theme: 'light' },
 ]
 
 export const defaultBackgroundId = 'background-1'
@@ -32,4 +33,9 @@ export const defaultBackgroundId = 'background-1'
 export function getBackgroundSrc(id: string | undefined): string {
   const found = backgroundOptions.find((b) => b.id === id)
   return found ? found.src : bg1
+}
+
+export function getBackgroundTheme(id: string | undefined): 'dark' | 'light' {
+  const found = backgroundOptions.find((b) => b.id === id)
+  return found ? found.theme : 'dark'
 }

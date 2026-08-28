@@ -3,6 +3,7 @@ import AuthPage from './pages/AuthPage/AuthPage'
 import CalendarPage from './pages/CalendarPage/CalendarPage'
 import Background from './components/Background/Background'
 import SettingsModal from './modals/SettingsModal/SettingsModal'
+import { getBackgroundTheme } from './assets/background/backgrounds'
 import useAppStore from './store/useAppStore'
 import './App.scss'
 
@@ -12,20 +13,13 @@ function App() {
   const backgroundsByUser = useAppStore((s) => s.backgroundsByUser)
   const lastBackground = useAppStore((s) => s.lastBackground)
   const backgroundId = user ? (backgroundsByUser[user] ?? lastBackground) : lastBackground
+  const theme = getBackgroundTheme(backgroundId)
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
 
-  if (!user) {
-    return (
-      <>
-        <Background id={backgroundId} />
-        <AuthPage onLogin={(login) => setUser(login)} />
-      </>
-    )
-  }
-
-  return (
+  const content = !user ? (
+    <AuthPage onLogin={(login) => setUser(login)} />
+  ) : (
     <>
-      <Background id={backgroundId} />
       <div className="app">
         <header className="app__header">
           <span className="app__user">{user}</span>
@@ -40,6 +34,13 @@ function App() {
       </div>
       <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
     </>
+  )
+
+  return (
+    <div className={`app-root app-root--${theme}`}>
+      <Background id={backgroundId} />
+      {content}
+    </div>
   )
 }
 

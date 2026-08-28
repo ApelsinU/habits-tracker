@@ -104,13 +104,15 @@ function Calendar({ activeDates, extended, onDateToggle, onDayClick }: CalendarP
           const dateStr = formatDate(year, month, day)
           const detail = activeDates[dateStr]
           const isActive = detail !== undefined
-          const isComplete = isActive && detail.percentage === 100
-          const barColor = isActive ? percentColor(detail.percentage) : undefined
+          const simple = !extended
+          const isComplete = isActive && (simple || detail.percentage === 100)
+          const progress = isActive ? (simple ? 100 : detail.percentage) : 0
+          const barColor = isActive ? (simple ? 'rgb(80,200,90)' : percentColor(detail.percentage)) : undefined
           return (
             <button
               key={dateStr}
               type="button"
-              className={`calendar__cell calendar__cell--day${isActive ? ' calendar__cell--active' : ''}${isComplete ? ' calendar__cell--complete' : ''}`}
+              className={`calendar__cell calendar__cell--day${isActive ? ' calendar__cell--active' : ''}${isComplete ? ' calendar__cell--complete' : ''}${simple && isActive ? ' calendar__cell--simple-complete' : ''}`}
               onClick={() => handleDayClick(dateStr)}
             >
               <span className="calendar__cell-day">{day}</span>
@@ -120,7 +122,7 @@ function Calendar({ activeDates, extended, onDateToggle, onDayClick }: CalendarP
               {isActive && (
                 <span
                   className="calendar__cell-bar"
-                  style={{ width: `${detail.percentage}%`, background: barColor }}
+                  style={{ width: `${progress}%`, background: barColor }}
                 />
               )}
             </button>

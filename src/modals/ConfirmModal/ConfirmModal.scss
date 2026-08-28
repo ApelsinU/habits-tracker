@@ -1,9 +1,9 @@
 .confirm-modal {
-  background: rgba(255, 255, 255, 0.18);
+  background: var(--glass-bg-soft);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid var(--glass-border);
   width: 100%;
   max-width: 360px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
@@ -30,7 +30,7 @@
   font-family: var(--heading);
   font-size: 18px;
   font-weight: 500;
-  color: #fff;
+  color: var(--glass-text);
   margin: 0;
 }
 
@@ -43,20 +43,20 @@
   border-radius: 6px;
   border: none;
   background: transparent;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--glass-text-faint);
   cursor: pointer;
   transition: all 0.2s;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.12);
-    color: #fff;
+    background: var(--glass-hover-bg);
+    color: var(--glass-text);
   }
 }
 
 .confirm-modal__message {
   padding: 16px 24px 0;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--glass-text-muted);
   margin: 0;
 
   @media (max-width: 600px) {
@@ -80,7 +80,7 @@
 .confirm-modal__btn {
   padding: 8px 16px;
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--glass-border-soft);
   font-size: 14px;
   cursor: pointer;
   transition: all 0.2s;
@@ -91,12 +91,12 @@
   }
 
   &--cancel {
-    background: rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.75);
+    background: var(--glass-bg);
+    color: var(--glass-text-muted);
 
     &:hover {
-      background: rgba(255, 255, 255, 0.2);
-      color: #fff;
+      background: var(--glass-hover-bg);
+      color: var(--glass-text);
     }
   }
 

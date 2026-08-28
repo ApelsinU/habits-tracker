@@ -16,11 +16,11 @@
 }
 
 .settings-modal {
-  background: rgba(255, 255, 255, 0.18);
+  background: var(--glass-bg-soft);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid var(--glass-border);
   width: 100%;
   max-width: 420px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
@@ -47,7 +47,7 @@
   font-family: var(--heading);
   font-size: 18px;
   font-weight: 500;
-  color: #fff;
+  color: var(--glass-text);
   margin: 0;
 }
 
@@ -60,13 +60,13 @@
   border-radius: 6px;
   border: none;
   background: transparent;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--glass-text-faint);
   cursor: pointer;
   transition: all 0.2s;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.12);
-    color: #fff;
+    background: var(--glass-hover-bg);
+    color: var(--glass-text);
   }
 }
 
@@ -83,7 +83,7 @@
 
 .settings-modal__label {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--glass-text-muted);
 }
 
 .settings-modal__grid {
@@ -96,14 +96,14 @@
   position: relative;
   padding: 0;
   border-radius: 8px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid var(--glass-border-soft);
   overflow: hidden;
   cursor: pointer;
   aspect-ratio: 3 / 2;
   transition: border-color 0.2s, transform 0.1s;
 
   &:hover {
-    border-color: rgba(255, 255, 255, 0.55);
+    border-color: var(--glass-border-strong);
   }
 
   &:active {
@@ -111,8 +111,8 @@
   }
 
   &--active {
-    border-color: #fff;
-    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+    border-color: var(--glass-text);
+    box-shadow: 0 0 0 2px var(--glass-border-strong);
   }
 }
 

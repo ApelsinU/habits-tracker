@@ -31,6 +31,42 @@
   }
 }
 
+.app-root {
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-bg-soft: rgba(255, 255, 255, 0.07);
+  --glass-input-bg: rgba(255, 255, 255, 0.06);
+  --glass-hover-bg: rgba(255, 255, 255, 0.11);
+  --glass-strong-bg: rgba(255, 255, 255, 0.9);
+  --glass-strong-bg-hover: #fff;
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-border-soft: rgba(255, 255, 255, 0.11);
+  --glass-border-strong: rgba(255, 255, 255, 0.22);
+  --glass-text: #fff;
+  --glass-text-muted: rgba(255, 255, 255, 0.75);
+  --glass-text-faint: rgba(255, 255, 255, 0.5);
+  --glass-text-placeholder: rgba(255, 255, 255, 0.45);
+  --glass-text-on-strong: #1a1828;
+  --glass-danger: #ffa0a0;
+}
+
+.app-root--light {
+  --glass-bg: rgba(20, 24, 40, 0.45);
+  --glass-bg-soft: rgba(20, 24, 40, 0.5);
+  --glass-input-bg: rgba(20, 24, 40, 0.45);
+  --glass-hover-bg: rgba(20, 24, 40, 0.65);
+  --glass-strong-bg: rgba(255, 255, 255, 0.95);
+  --glass-strong-bg-hover: #fff;
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --glass-border-soft: rgba(255, 255, 255, 0.12);
+  --glass-border-strong: rgba(255, 255, 255, 0.3);
+  --glass-text: #fff;
+  --glass-text-muted: rgba(255, 255, 255, 0.75);
+  --glass-text-faint: rgba(255, 255, 255, 0.5);
+  --glass-text-placeholder: rgba(255, 255, 255, 0.45);
+  --glass-text-on-strong: #1a1828;
+  --glass-danger: #ffa0a0;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --text: #9098b0;

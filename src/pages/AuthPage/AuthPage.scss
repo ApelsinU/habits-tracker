@@ -19,10 +19,10 @@
   height: fit-content;
   padding: 28px 32px;
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.18);
+  background: var(--glass-bg-soft);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid var(--glass-border);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
 
   @media (max-width: 600px) {
@@ -34,7 +34,7 @@
   font-family: var(--heading);
   font-size: 22px;
   font-weight: 500;
-  color: #fff;
+  color: var(--glass-text);
   margin: 0 0 20px;
   text-align: center;
 }
@@ -53,27 +53,27 @@
 
 .auth-card__label {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--glass-text-muted);
 }
 
 .auth-card__input {
   padding: 11px 14px;
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
+  border: 1px solid var(--glass-border-soft);
+  background: var(--glass-input-bg);
+  color: var(--glass-text);
   font-size: 14px;
   font-family: var(--sans);
   outline: none;
   transition: border-color 0.2s, background 0.2s;
 
   &::placeholder {
-    color: rgba(255, 255, 255, 0.45);
+    color: var(--glass-text-placeholder);
   }
 
   &:focus {
-    border-color: rgba(255, 255, 255, 0.45);
-    background: rgba(255, 255, 255, 0.18);
+    border-color: var(--glass-border-strong);
+    background: var(--glass-hover-bg);
   }
 }
 
@@ -100,27 +100,27 @@
   border: none;
   border-radius: 6px;
   background: transparent;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--glass-text-faint);
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.12);
-    color: #fff;
+    background: var(--glass-hover-bg);
+    color: var(--glass-text);
   }
 }
 
 .auth-card__error {
   font-size: 13px;
-  color: #ffa0a0;
+  color: var(--glass-danger);
 }
 
 .auth-card__submit {
   padding: 11px 16px;
   border-radius: 10px;
   border: none;
-  background: rgba(255, 255, 255, 0.9);
-  color: #1a1828;
+  background: var(--glass-strong-bg);
+  color: var(--glass-text-on-strong);
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
@@ -128,7 +128,7 @@
   transition: background 0.2s, transform 0.1s;
 
   &:hover {
-    background: #fff;
+    background: var(--glass-strong-bg-hover);
   }
 
   &:active {
