@@ -28,11 +28,11 @@ export const backgroundOptions: BackgroundOption[] = [
   { id: 'background-10', src: bg10, theme: 'light' },
 ]
 
-export const defaultBackgroundId = 'background-2'
+export const defaultBackgroundId = 'background-10'
 
 export function getBackgroundSrc(id: string | undefined): string {
   const found = backgroundOptions.find((b) => b.id === id)
-  return found ? found.src : bg2
+  return found ? found.src : bg10
 }
 
 export function getBackgroundTheme(id: string | undefined): 'dark' | 'light' {

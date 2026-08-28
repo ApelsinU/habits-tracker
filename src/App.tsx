@@ -2,6 +2,7 @@ import { useState } from 'react'
 import AuthPage from './pages/AuthPage/AuthPage'
 import CalendarPage from './pages/CalendarPage/CalendarPage'
 import TodoListPage from './pages/TodoListPage/TodoListPage'
+import StatisticsPage from './pages/StatisticsPage/StatisticsPage'
 import SideMenu from './components/SideMenu/SideMenu'
 import Background from './components/Background/Background'
 import SettingsModal from './modals/SettingsModal/SettingsModal'
@@ -21,7 +22,8 @@ function App() {
   const theme = getBackgroundTheme(backgroundId)
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
 
-  const page = currentPage === 'todo' ? <TodoListPage /> : <CalendarPage />
+  const page =
+    currentPage === 'todo' ? <TodoListPage /> : currentPage === 'stats' ? <StatisticsPage /> : <CalendarPage />
 
   const content = !user ? (
     <AuthPage onLogin={(login) => setUser(login)} />

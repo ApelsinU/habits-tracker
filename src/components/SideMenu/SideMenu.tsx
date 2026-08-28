@@ -4,6 +4,7 @@ import './SideMenu.scss'
 const LINKS: { id: PageId; label: string }[] = [
   { id: 'calendar', label: 'Календарь' },
   { id: 'todo', label: 'Todo List' },
+  { id: 'stats', label: 'Статистика' },
 ]
 
 function SideMenu() {

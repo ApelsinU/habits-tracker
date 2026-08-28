@@ -20,7 +20,7 @@ function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
 
   if (!isOpen) return null
 
-  const currentId = user ? (backgroundsByUser[user] ?? 'background-2') : 'background-2'
+  const currentId = user ? (backgroundsByUser[user] ?? 'background-10') : 'background-10'
 
   return (
     <div className="settings-overlay" onClick={onClose}>

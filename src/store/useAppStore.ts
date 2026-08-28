@@ -21,7 +21,7 @@ export interface TodoItem {
   completed: boolean
 }
 
-export type PageId = 'calendar' | 'todo'
+export type PageId = 'calendar' | 'todo' | 'stats'
 
 interface AppState {
   user: string | null
