@@ -2,8 +2,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100svh;
+  height: 100svh;
   padding: 32px;
+  overflow: hidden;
+  box-sizing: border-box;
 
   @media (max-width: 600px) {
     padding: 16px;
@@ -14,7 +16,8 @@
 .auth-card {
   width: 100%;
   max-width: 400px;
-  padding: 36px 32px;
+  height: fit-content;
+  padding: 28px 32px;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.18);
   backdrop-filter: blur(20px);
@@ -23,23 +26,23 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
 
   @media (max-width: 600px) {
-    padding: 28px 20px;
+    padding: 24px 20px;
   }
 }
 
 .auth-card__title {
   font-family: var(--heading);
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 500;
   color: #fff;
-  margin: 0 0 28px;
+  margin: 0 0 20px;
   text-align: center;
 }
 
 .auth-card__form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 
 .auth-card__field {

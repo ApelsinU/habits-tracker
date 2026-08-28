@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import { defaultBackgroundId } from '../assets/background/backgrounds'
 
 export interface DayData {
   percentage: number
@@ -19,6 +20,9 @@ interface AppState {
   setUser: (user: string | null) => void
 
   calendarsByUser: Record<string, CalendarData[]>
+  backgroundsByUser: Record<string, string>
+  lastBackground: string
+  setBackground: (id: string) => void
   activeId: string
   isModalOpen: boolean
   toggleDate: (date: string) => void
@@ -45,6 +49,21 @@ const useAppStore = create<AppState>()(
         }),
 
       calendarsByUser: {},
+      backgroundsByUser: {},
+      lastBackground: defaultBackgroundId,
+
+      setBackground: (id) =>
+        set((state) => {
+          const updates: Partial<AppState> = { lastBackground: id }
+          if (state.user) {
+            updates.backgroundsByUser = {
+              ...state.backgroundsByUser,
+              [state.user]: id,
+            }
+          }
+          return updates
+        }),
+
       activeId: '',
       isModalOpen: false,
 

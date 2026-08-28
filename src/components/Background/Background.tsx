@@ -1,14 +1,14 @@
-import bgDefault from '../../assets/background/background-1.jpg'
+import { getBackgroundSrc } from '../../assets/background/backgrounds'
 import './Background.scss'
 
 interface BackgroundProps {
-  src?: string
+  id?: string
 }
 
-function Background({ src = bgDefault }: BackgroundProps) {
+function Background({ id }: BackgroundProps) {
   return (
     <div className="background">
-      <img className="background__image" src={src} alt="" />
+      <img className="background__image" src={getBackgroundSrc(id)} alt="" />
     </div>
   )
 }

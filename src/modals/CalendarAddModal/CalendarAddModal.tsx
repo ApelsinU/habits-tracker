@@ -10,7 +10,8 @@ interface CalendarAddModalProps {
 function CalendarAddModal({ isOpen, onClose, onAdd }: CalendarAddModalProps) {
   const [name, setName] = useState('')
   const [goal, setGoal] = useState('')
-  const [extended, setExtended] = useState(false)
+  const [simple, setSimple] = useState(false)
+  const extended = !simple
 
   if (!isOpen) return null
 
@@ -21,7 +22,7 @@ function CalendarAddModal({ isOpen, onClose, onAdd }: CalendarAddModalProps) {
       onAdd(trimmed, goal.trim(), extended)
       setName('')
       setGoal('')
-      setExtended(false)
+      setSimple(false)
       onClose()
     }
   }
@@ -29,7 +30,7 @@ function CalendarAddModal({ isOpen, onClose, onAdd }: CalendarAddModalProps) {
   const handleClose = () => {
     setName('')
     setGoal('')
-    setExtended(false)
+    setSimple(false)
     onClose()
   }
 
@@ -67,11 +68,11 @@ function CalendarAddModal({ isOpen, onClose, onAdd }: CalendarAddModalProps) {
             <input
               type="checkbox"
               className="modal__checkbox-input"
-              checked={extended}
-              onChange={(e) => setExtended(e.target.checked)}
+              checked={simple}
+              onChange={(e) => setSimple(e.target.checked)}
             />
             <span className="modal__checkbox-mark" />
-            <span className="modal__checkbox-text">Расширенный режим</span>
+            <span className="modal__checkbox-text">Простой режим</span>
           </label>
           <div className="modal__actions">
             <button type="button" className="modal__btn modal__btn--cancel" onClick={handleClose}>
