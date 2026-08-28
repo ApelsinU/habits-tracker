@@ -12,8 +12,14 @@ interface DayDetailModalProps {
   onClose: () => void
 }
 
+function minuteColor(p: number): string {
+  const r = p < 50 ? 210 : Math.round(210 - (p - 50) * 3.2)
+  const g = p < 50 ? Math.round(100 + p * 2.2) : 210
+  return `rgb(${Math.min(255, r)},${Math.min(255, g)},90)`
+}
+
 function DayDetailModal({ isOpen, date, detail, isNew, onSave, onRemove, onClose }: DayDetailModalProps) {
-  const [percentage, setPercentage] = useState(detail?.percentage ?? 0)
+  const [percentage, setPercentage] = useState(detail?.percentage ?? (isNew ? 100 : 0))
   const [description, setDescription] = useState(detail?.description ?? '')
 
   if (!isOpen) return null
@@ -33,6 +39,11 @@ function DayDetailModal({ isOpen, date, detail, isNew, onSave, onRemove, onClose
     month: 'long',
     year: 'numeric',
   })
+
+  const rangeColor = minuteColor(percentage)
+  const rangeStyle = {
+    background: `linear-gradient(to right, ${rangeColor} ${percentage}%, var(--glass-bg-soft) ${percentage}%)`,
+  }
 
   return (
     <div className="modal-overlay" onClick={onClose}>
@@ -55,6 +66,7 @@ function DayDetailModal({ isOpen, date, detail, isNew, onSave, onRemove, onClose
                 min={0}
                 max={100}
                 value={percentage}
+                style={rangeStyle}
                 onChange={(e) => setPercentage(Number(e.target.value))}
               />
               <span className="day-modal__value">{percentage}%</span>

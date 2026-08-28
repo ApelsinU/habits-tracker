@@ -14,11 +14,13 @@ function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
   const setBackground = useAppStore((s) => s.setBackground)
   const simpleTheme = useAppStore((s) => s.simpleTheme)
   const setSimpleTheme = useAppStore((s) => s.setSimpleTheme)
+  const simpleDark = useAppStore((s) => s.simpleDark)
+  const setSimpleDark = useAppStore((s) => s.setSimpleDark)
   const [tab, setTab] = useState<'background' | 'simple'>('background')
 
   if (!isOpen) return null
 
-  const currentId = user ? (backgroundsByUser[user] ?? 'background-1') : 'background-1'
+  const currentId = user ? (backgroundsByUser[user] ?? 'background-2') : 'background-2'
 
   return (
     <div className="settings-overlay" onClick={onClose}>
@@ -44,7 +46,7 @@ function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
             className={`settings-modal__tab${tab === 'simple' ? ' settings-modal__tab--active' : ''}`}
             onClick={() => setTab('simple')}
           >
-            Simple Theme
+            Простая тема
           </button>
         </div>
         <div className="settings-modal__body">
@@ -57,7 +59,11 @@ function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                     key={bg.id}
                     type="button"
                     className={`settings-modal__option${bg.id === currentId ? ' settings-modal__option--active' : ''}`}
-                    onClick={() => setBackground(bg.id)}
+                    onClick={() => {
+                      setBackground(bg.id)
+                      if (simpleTheme) setSimpleTheme(false)
+                      if (simpleDark) setSimpleDark(false)
+                    }}
                   >
                     <img className="settings-modal__preview" src={bg.src} alt={bg.id} />
                   </button>
@@ -65,19 +71,40 @@ function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
               </div>
             </>
           ) : (
-            <label className="settings-modal__simple">
-              <span className="settings-modal__simple-label">Simple Theme</span>
-              <span className="settings-modal__simple-desc">Черно-белый режим без фона</span>
-              <button
-                type="button"
-                role="switch"
-                aria-checked={simpleTheme}
-                className={`settings-modal__switch${simpleTheme ? ' settings-modal__switch--on' : ''}`}
-                onClick={() => setSimpleTheme(!simpleTheme)}
-              >
-                <span className="settings-modal__switch-thumb" />
-              </button>
-            </label>
+            <div className="settings-modal__simple-group">
+              <label className="settings-modal__simple">
+                <span className="settings-modal__simple-label">Простая тема (Светлая)</span>
+                <span className="settings-modal__simple-desc">Черно-белый режим без фона</span>
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked={simpleTheme && !simpleDark}
+                  className={`settings-modal__switch${simpleTheme && !simpleDark ? ' settings-modal__switch--on' : ''}`}
+                  onClick={() => {
+                    setSimpleTheme(true)
+                    setSimpleDark(false)
+                  }}
+                >
+                  <span className="settings-modal__switch-thumb" />
+                </button>
+              </label>
+              <label className="settings-modal__simple">
+                <span className="settings-modal__simple-label">Простая тема (Темная)</span>
+                <span className="settings-modal__simple-desc">Черно-белый режим без фона</span>
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked={simpleTheme && simpleDark}
+                  className={`settings-modal__switch${simpleTheme && simpleDark ? ' settings-modal__switch--on' : ''}`}
+                  onClick={() => {
+                    setSimpleTheme(true)
+                    setSimpleDark(true)
+                  }}
+                >
+                  <span className="settings-modal__switch-thumb" />
+                </button>
+              </label>
+            </div>
           )}
         </div>
       </div>

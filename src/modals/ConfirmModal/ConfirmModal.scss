@@ -120,3 +120,13 @@
     background: #333;
   }
 }
+
+.app-root--simple.app-root--simple-dark .confirm-modal__btn--danger {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+
+  &:hover {
+    background: #d9d9d9;
+  }
+}

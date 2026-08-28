@@ -15,6 +15,7 @@ function App() {
   const backgroundsByUser = useAppStore((s) => s.backgroundsByUser)
   const lastBackground = useAppStore((s) => s.lastBackground)
   const simpleTheme = useAppStore((s) => s.simpleTheme)
+  const simpleDark = useAppStore((s) => s.simpleDark)
   const currentPage = useAppStore((s) => s.currentPage)
   const backgroundId = user ? (backgroundsByUser[user] ?? lastBackground) : lastBackground
   const theme = getBackgroundTheme(backgroundId)
@@ -46,7 +47,9 @@ function App() {
   )
 
   return (
-    <div className={`app-root app-root--${theme}${simpleTheme ? ' app-root--simple' : ''}`}>
+    <div
+      className={`app-root app-root--${theme}${simpleTheme ? ' app-root--simple' : ''}${simpleTheme && simpleDark ? ' app-root--simple-dark' : ''}`}
+    >
       {!simpleTheme && <Background id={backgroundId} />}
       {content}
     </div>

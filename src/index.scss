@@ -86,6 +86,25 @@
   --glass-danger: #000000;
 }
 
+.app-root--simple.app-root--simple-dark {
+  background: #000;
+  --glass-bg: #1a1a1a;
+  --glass-bg-soft: #000000;
+  --glass-input-bg: #141414;
+  --glass-hover-bg: #2e2e2e;
+  --glass-strong-bg: #ffffff;
+  --glass-strong-bg-hover: #d9d9d9;
+  --glass-border: #4d4d4d;
+  --glass-border-soft: #3a3a3a;
+  --glass-border-strong: #ffffff;
+  --glass-text: #ffffff;
+  --glass-text-muted: #b3b3b3;
+  --glass-text-faint: #8a8a8a;
+  --glass-text-placeholder: #6e6e6e;
+  --glass-text-on-strong: #000000;
+  --glass-danger: #ffffff;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --text: #9098b0;

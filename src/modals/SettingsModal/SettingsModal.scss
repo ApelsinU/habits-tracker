@@ -115,6 +115,12 @@
   background: var(--glass-bg);
 }
 
+.settings-modal__simple-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .settings-modal__simple-label {
   font-size: 14px;
   font-weight: 500;

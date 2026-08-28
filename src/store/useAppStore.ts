@@ -36,6 +36,8 @@ interface AppState {
   setBackground: (id: string) => void
   simpleTheme: boolean
   setSimpleTheme: (value: boolean) => void
+  simpleDark: boolean
+  setSimpleDark: (value: boolean) => void
   activeId: string
   isModalOpen: boolean
   toggleDate: (date: string) => void
@@ -89,6 +91,9 @@ const useAppStore = create<AppState>()(
 
       simpleTheme: false,
       setSimpleTheme: (simpleTheme) => set({ simpleTheme }),
+
+      simpleDark: false,
+      setSimpleDark: (simpleDark) => set({ simpleDark }),
 
       activeId: '',
       isModalOpen: false,

@@ -200,7 +200,7 @@
     border-color: var(--glass-strong-bg);
 
     &::after {
-      transform: rotate(45deg) scale(1);
+      transform: rotate(45deg) scale(1) translate(-1px, -1px);
     }
   }
 }

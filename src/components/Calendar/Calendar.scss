@@ -147,8 +147,24 @@
   }
 }
 
+.app-root--simple.app-root--simple-dark .calendar__cell--complete {
+  background: #fff;
+
+  &:hover {
+    background: #fff;
+  }
+
+  .calendar__cell-day {
+    color: #000;
+  }
+}
+
 .app-root--simple .calendar__cell-bar {
   background: #000;
+}
+
+.app-root--simple.app-root--simple-dark .calendar__cell-bar {
+  background: #fff;
 }
 
 .calendar__cell-bar {

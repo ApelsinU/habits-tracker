@@ -37,11 +37,12 @@ interface CalendarProps {
   extended: boolean
   theme: 'dark' | 'light'
   simpleTheme?: boolean
+  simpleDark?: boolean
   onDateToggle: (date: string) => void
   onDayClick: (date: string) => void
 }
 
-function Calendar({ activeDates, extended, theme, simpleTheme, onDateToggle, onDayClick }: CalendarProps) {
+function Calendar({ activeDates, extended, theme, simpleTheme, simpleDark, onDateToggle, onDayClick }: CalendarProps) {
   const now = new Date()
   const [month, setMonth] = useState(now.getMonth())
   const [year, setYear] = useState(now.getFullYear())
@@ -114,7 +115,9 @@ function Calendar({ activeDates, extended, theme, simpleTheme, onDateToggle, onD
           const progress = isActive ? (simple ? 100 : detail.percentage) : 0
           const barColor = isActive
             ? simpleTheme
-              ? 'rgb(0,0,0)'
+              ? simpleDark
+                ? 'rgb(255,255,255)'
+                : 'rgb(0,0,0)'
               : percentColor(detail.percentage, theme === 'light')
             : undefined
           return (
