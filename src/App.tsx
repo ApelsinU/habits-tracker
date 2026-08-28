@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import AuthPage from './pages/AuthPage/AuthPage'
 import CalendarPage from './pages/CalendarPage/CalendarPage'
+import TodoListPage from './pages/TodoListPage/TodoListPage'
+import SideMenu from './components/SideMenu/SideMenu'
 import Background from './components/Background/Background'
 import SettingsModal from './modals/SettingsModal/SettingsModal'
 import { getBackgroundTheme } from './assets/background/backgrounds'
@@ -12,9 +14,13 @@ function App() {
   const setUser = useAppStore((s) => s.setUser)
   const backgroundsByUser = useAppStore((s) => s.backgroundsByUser)
   const lastBackground = useAppStore((s) => s.lastBackground)
+  const simpleTheme = useAppStore((s) => s.simpleTheme)
+  const currentPage = useAppStore((s) => s.currentPage)
   const backgroundId = user ? (backgroundsByUser[user] ?? lastBackground) : lastBackground
   const theme = getBackgroundTheme(backgroundId)
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
+
+  const page = currentPage === 'todo' ? <TodoListPage /> : <CalendarPage />
 
   const content = !user ? (
     <AuthPage onLogin={(login) => setUser(login)} />
@@ -30,15 +36,18 @@ function App() {
             Выйти
           </button>
         </header>
-        <CalendarPage />
+        <div className="app__body">
+          <SideMenu />
+          <main className="app__content">{page}</main>
+        </div>
       </div>
       <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
     </>
   )
 
   return (
-    <div className={`app-root app-root--${theme}`}>
-      <Background id={backgroundId} />
+    <div className={`app-root app-root--${theme}${simpleTheme ? ' app-root--simple' : ''}`}>
+      {!simpleTheme && <Background id={backgroundId} />}
       {content}
     </div>
   )

@@ -193,6 +193,16 @@
   }
 }
 
+.app-root--simple .calendar-switcher__menu-edit,
+.app-root--simple .calendar-switcher__menu-delete {
+  color: var(--glass-text-muted);
+
+  &:hover {
+    color: var(--glass-text);
+    background: var(--glass-hover-bg);
+  }
+}
+
 .calendar-switcher__add {
   display: flex;
   align-items: center;

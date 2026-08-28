@@ -15,14 +15,27 @@ export interface CalendarData {
   activeDates: Record<string, DayData>
 }
 
+export interface TodoItem {
+  id: string
+  text: string
+  completed: boolean
+}
+
+export type PageId = 'calendar' | 'todo'
+
 interface AppState {
   user: string | null
   setUser: (user: string | null) => void
+
+  currentPage: PageId
+  setCurrentPage: (page: PageId) => void
 
   calendarsByUser: Record<string, CalendarData[]>
   backgroundsByUser: Record<string, string>
   lastBackground: string
   setBackground: (id: string) => void
+  simpleTheme: boolean
+  setSimpleTheme: (value: boolean) => void
   activeId: string
   isModalOpen: boolean
   toggleDate: (date: string) => void
@@ -33,6 +46,13 @@ interface AppState {
   deleteCalendar: (id: string) => void
   setActiveId: (id: string) => void
   setIsModalOpen: (open: boolean) => void
+
+  todosByUser: Record<string, TodoItem[]>
+  addTodo: (text: string) => void
+  toggleTodo: (id: string) => void
+  removeTodo: (id: string) => void
+  clearCompletedTodos: () => void
+  clearAllTodos: () => void
 }
 
 const useAppStore = create<AppState>()(
@@ -47,6 +67,9 @@ const useAppStore = create<AppState>()(
             activeId: userCals.length > 0 ? userCals[0].id : '',
           }
         }),
+
+      currentPage: 'calendar',
+      setCurrentPage: (currentPage) => set({ currentPage }),
 
       calendarsByUser: {},
       backgroundsByUser: {},
@@ -63,6 +86,9 @@ const useAppStore = create<AppState>()(
           }
           return updates
         }),
+
+      simpleTheme: false,
+      setSimpleTheme: (simpleTheme) => set({ simpleTheme }),
 
       activeId: '',
       isModalOpen: false,
@@ -174,6 +200,61 @@ const useAppStore = create<AppState>()(
 
       setActiveId: (activeId) => set({ activeId }),
       setIsModalOpen: (isModalOpen) => set({ isModalOpen }),
+
+      todosByUser: {},
+      addTodo: (text) =>
+        set((state) => {
+          if (!state.user) return {}
+          const item: TodoItem = { id: Date.now().toString(), text, completed: false }
+          return {
+            todosByUser: {
+              ...state.todosByUser,
+              [state.user]: [...(state.todosByUser[state.user] ?? []), item],
+            },
+          }
+        }),
+      toggleTodo: (id) =>
+        set((state) => {
+          if (!state.user) return {}
+          return {
+            todosByUser: {
+              ...state.todosByUser,
+              [state.user]: (state.todosByUser[state.user] ?? []).map((t) =>
+                t.id === id ? { ...t, completed: !t.completed } : t
+              ),
+            },
+          }
+        }),
+      removeTodo: (id) =>
+        set((state) => {
+          if (!state.user) return {}
+          return {
+            todosByUser: {
+              ...state.todosByUser,
+              [state.user]: (state.todosByUser[state.user] ?? []).filter((t) => t.id !== id),
+            },
+          }
+        }),
+      clearCompletedTodos: () =>
+        set((state) => {
+          if (!state.user) return {}
+          return {
+            todosByUser: {
+              ...state.todosByUser,
+              [state.user]: (state.todosByUser[state.user] ?? []).filter((t) => !t.completed),
+            },
+          }
+        }),
+      clearAllTodos: () =>
+        set((state) => {
+          if (!state.user) return {}
+          return {
+            todosByUser: {
+              ...state.todosByUser,
+              [state.user]: [],
+            },
+          }
+        }),
     }),
     { name: 'habits-tracker' },
   ),

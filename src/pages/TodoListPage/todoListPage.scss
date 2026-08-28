@@ -1,0 +1,234 @@
+.todo-page {
+  padding: 32px;
+  display: flex;
+  justify-content: center;
+
+  @media (max-width: 1024px) {
+    padding: 20px;
+  }
+
+  @media (max-width: 600px) {
+    padding: 16px;
+  }
+}
+
+.todo-page__card {
+  width: 100%;
+  max-width: 520px;
+  padding: 28px 32px;
+  border-radius: 16px;
+  background: var(--glass-bg-soft);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border-soft);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 600px) {
+    padding: 20px;
+  }
+}
+
+.todo-page__title {
+  font-family: var(--heading);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--glass-text);
+  margin: 0 0 4px;
+}
+
+.todo-page__progress {
+  font-size: 13px;
+  color: var(--glass-text-muted);
+  margin: 0 0 20px;
+}
+
+.todo-page__form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.todo-page__input {
+  flex: 1;
+  min-width: 0;
+  padding: 11px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--glass-border-soft);
+  background: var(--glass-input-bg);
+  color: var(--glass-text);
+  font-size: 14px;
+  font-family: var(--sans);
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+
+  &::placeholder {
+    color: var(--glass-text-placeholder);
+  }
+
+  &:focus {
+    border-color: var(--glass-border-strong);
+    background: var(--glass-hover-bg);
+  }
+}
+
+.todo-page__add {
+  padding: 11px 16px;
+  border-radius: 10px;
+  border: none;
+  background: var(--glass-strong-bg);
+  color: var(--glass-text-on-strong);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s;
+
+  &:hover {
+    background: var(--glass-strong-bg-hover);
+  }
+}
+
+.todo-page__panel {
+  display: flex;
+  gap: 8px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--glass-border-soft);
+}
+
+.todo-page__clean {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--glass-border-soft);
+  background: var(--glass-bg);
+  color: var(--glass-text-muted);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover:not(:disabled) {
+    background: var(--glass-hover-bg);
+    color: var(--glass-text);
+    border-color: var(--glass-border-strong);
+  }
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+}
+
+.todo-page__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.todo-page__empty {
+  font-size: 14px;
+  color: var(--glass-text-faint);
+  text-align: center;
+  padding: 24px 0;
+}
+
+.todo-page__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--glass-border-soft);
+  background: var(--glass-bg);
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-color: var(--glass-border-strong);
+  }
+
+  &--done .todo-page__text {
+    text-decoration: line-through;
+    color: var(--glass-text-faint);
+  }
+}
+
+.todo-page__check {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.todo-page__checkbox {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.todo-page__checkmark {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  border: 1px solid var(--glass-border-soft);
+  background: var(--glass-input-bg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+
+  &::after {
+    content: '';
+    width: 5px;
+    height: 9px;
+    border: solid var(--glass-text-on-strong);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg) scale(0);
+    transition: transform 0.15s;
+  }
+
+  .todo-page__checkbox:checked + & {
+    background: var(--glass-strong-bg);
+    border-color: var(--glass-strong-bg);
+
+    &::after {
+      transform: rotate(45deg) scale(1);
+    }
+  }
+}
+
+.todo-page__text {
+  flex: 1;
+  min-width: 0;
+  font-size: 14px;
+  color: var(--glass-text);
+  overflow-wrap: anywhere;
+}
+
+.todo-page__remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: var(--glass-text-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.15s;
+
+  &:hover {
+    background: var(--glass-hover-bg);
+    color: var(--glass-text);
+  }
+}

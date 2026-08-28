@@ -67,6 +67,25 @@
   --glass-danger: #ffa0a0;
 }
 
+.app-root--simple {
+  background: #fff;
+  --glass-bg: #f2f2f2;
+  --glass-bg-soft: #ffffff;
+  --glass-input-bg: #f7f7f7;
+  --glass-hover-bg: #e8e8e8;
+  --glass-strong-bg: #000000;
+  --glass-strong-bg-hover: #333333;
+  --glass-border: #cccccc;
+  --glass-border-soft: #dddddd;
+  --glass-border-strong: #000000;
+  --glass-text: #000000;
+  --glass-text-muted: #555555;
+  --glass-text-faint: #808080;
+  --glass-text-placeholder: #999999;
+  --glass-text-on-strong: #ffffff;
+  --glass-danger: #000000;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --text: #9098b0;
@@ -98,10 +117,12 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
+  overflow-x: hidden;
 }
 
 h1,

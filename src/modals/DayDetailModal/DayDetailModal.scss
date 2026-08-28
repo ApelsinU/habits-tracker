@@ -212,3 +212,13 @@
     }
   }
 }
+
+.app-root--simple .day-modal__btn--danger {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+
+  &:hover {
+    background: #333;
+  }
+}

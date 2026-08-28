@@ -17,6 +17,7 @@ function CalendarPage() {
   const lastBackground = useAppStore((s) => s.lastBackground)
   const backgroundId = user ? (backgroundsByUser[user] ?? lastBackground) : lastBackground
   const theme = getBackgroundTheme(backgroundId)
+  const simpleTheme = useAppStore((s) => s.simpleTheme)
   const activeId = useAppStore((s) => s.activeId)
   const isModalOpen = useAppStore((s) => s.isModalOpen)
   const toggleDate = useAppStore((s) => s.toggleDate)
@@ -94,6 +95,7 @@ function CalendarPage() {
           activeDates={activeCalendar.activeDates}
           extended={activeCalendar.extended}
           theme={theme}
+          simpleTheme={simpleTheme}
           onDateToggle={toggleDate}
           onDayClick={handleDayClick}
         />

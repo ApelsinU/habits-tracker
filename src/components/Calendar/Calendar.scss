@@ -135,6 +135,22 @@
   }
 }
 
+.app-root--simple .calendar__cell--complete {
+  background: #000;
+
+  &:hover {
+    background: #000;
+  }
+
+  .calendar__cell-day {
+    color: #fff;
+  }
+}
+
+.app-root--simple .calendar__cell-bar {
+  background: #000;
+}
+
 .calendar__cell-bar {
   position: absolute;
   bottom: 0;

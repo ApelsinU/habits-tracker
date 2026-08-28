@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { backgroundOptions } from '../../assets/background/backgrounds'
 import useAppStore from '../../store/useAppStore'
 import './SettingsModal.scss'
@@ -11,6 +12,9 @@ function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
   const user = useAppStore((s) => s.user)
   const backgroundsByUser = useAppStore((s) => s.backgroundsByUser)
   const setBackground = useAppStore((s) => s.setBackground)
+  const simpleTheme = useAppStore((s) => s.simpleTheme)
+  const setSimpleTheme = useAppStore((s) => s.setSimpleTheme)
+  const [tab, setTab] = useState<'background' | 'simple'>('background')
 
   if (!isOpen) return null
 
@@ -27,20 +31,54 @@ function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
             </svg>
           </button>
         </div>
+        <div className="settings-modal__tabs">
+          <button
+            type="button"
+            className={`settings-modal__tab${tab === 'background' ? ' settings-modal__tab--active' : ''}`}
+            onClick={() => setTab('background')}
+          >
+            Фон
+          </button>
+          <button
+            type="button"
+            className={`settings-modal__tab${tab === 'simple' ? ' settings-modal__tab--active' : ''}`}
+            onClick={() => setTab('simple')}
+          >
+            Simple Theme
+          </button>
+        </div>
         <div className="settings-modal__body">
-          <span className="settings-modal__label">Фон</span>
-          <div className="settings-modal__grid">
-            {backgroundOptions.map((bg) => (
+          {tab === 'background' ? (
+            <>
+              <span className="settings-modal__label">Фон</span>
+              <div className="settings-modal__grid">
+                {backgroundOptions.map((bg) => (
+                  <button
+                    key={bg.id}
+                    type="button"
+                    className={`settings-modal__option${bg.id === currentId ? ' settings-modal__option--active' : ''}`}
+                    onClick={() => setBackground(bg.id)}
+                  >
+                    <img className="settings-modal__preview" src={bg.src} alt={bg.id} />
+                  </button>
+                ))}
+              </div>
+            </>
+          ) : (
+            <label className="settings-modal__simple">
+              <span className="settings-modal__simple-label">Simple Theme</span>
+              <span className="settings-modal__simple-desc">Черно-белый режим без фона</span>
               <button
-                key={bg.id}
                 type="button"
-                className={`settings-modal__option${bg.id === currentId ? ' settings-modal__option--active' : ''}`}
-                onClick={() => setBackground(bg.id)}
+                role="switch"
+                aria-checked={simpleTheme}
+                className={`settings-modal__switch${simpleTheme ? ' settings-modal__switch--on' : ''}`}
+                onClick={() => setSimpleTheme(!simpleTheme)}
               >
-                <img className="settings-modal__preview" src={bg.src} alt={bg.id} />
+                <span className="settings-modal__switch-thumb" />
               </button>
-            ))}
-          </div>
+            </label>
+          )}
         </div>
       </div>
     </div>

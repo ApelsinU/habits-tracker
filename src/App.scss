@@ -4,6 +4,20 @@
   min-height: 100svh;
 }
 
+.app__body {
+  display: flex;
+  flex: 1;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
+}
+
+.app__content {
+  flex: 1;
+  min-width: 0;
+}
+
 .app__header {
   position: sticky;
   top: 0;
