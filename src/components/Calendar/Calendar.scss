@@ -78,6 +78,8 @@
   border: none;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
+  position: relative;
+  overflow: hidden;
 
   &--empty {
     cursor: default;
@@ -103,20 +105,28 @@
       background: rgba(255, 255, 255, 0.2);
     }
   }
+
+  &--complete {
+    background: rgba(100, 210, 110, 0.18);
+
+    &:hover {
+      background: rgba(100, 210, 110, 0.26);
+    }
+  }
+}
+
+.calendar__cell-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  border-radius: 0 0 0.5em 0.5em;
+  transition: width 0.3s ease;
 }
 
 .calendar__cell-day {
   font-size: 1em;
   line-height: 1;
-}
-
-.calendar__cell-percent {
-  font-size: 0.6875em;
-  font-weight: 600;
-  line-height: 1;
-  color: #fff;
-  opacity: 0.85;
-  margin-top: 0.125em;
 }
 
 .calendar__cell-desc {
